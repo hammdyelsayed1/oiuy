@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Mona | Personal Space</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:radial-gradient(circle at top,#1b1f3b,#05050f);
+    color:#fff;
+    overflow-x:hidden;
+}
+html{scroll-behavior:smooth}
+
+/* ===== LOGIN ===== */
+#login{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.login-box{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    padding:40px;
+    width:320px;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+    transform:perspective(800px) rotateX(8deg);
+}
+.login-box h2{margin-bottom:10px}
+.login-box p{font-size:14px;opacity:.8;margin-bottom:20px}
+.login-box input{
+    width:100%;
+    padding:12px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+.login-box button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#00f5ff,#6f00ff);
+}
+#error{color:#ff6b6b;font-size:13px;display:none}
+
+/* ===== SITE ===== */
+#site{display:none}
+
+section{
+    padding:80px 10%;
+    position:relative;
+    margin-bottom:120px;
+}
+section::after{
+    content:"";
+    position:absolute;
+    bottom:-60px;
+    left:50%;
+    width:65%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+    transform:translateX(-50%);
+}
+
+/* ===== HERO ===== */
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.hero h1{
+    font-size:48px;
+}
+.hero span{color:#00f5ff}
+.hero p{
+    max-width:600px;
+    margin-top:20px;
+    line-height:1.9;
+    opacity:.85;
+}
+
+/* ===== BUTTON ===== */
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:15px 35px;
+    border-radius:40px;
+    text-decoration:none;
+    font-weight:600;
+    color:#000;
+    background:linear-gradient(135deg,#00f5ff,#6f00ff);
+    box-shadow:0 20px 40px rgba(0,245,255,.4);
+    position:relative;
+    overflow:hidden;
+}
+.btn::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,.35);
+    transition:.4s;
+}
+.btn:hover::after{left:100%}
+
+/* ===== TEXT ===== */
+h2{
+    font-size:38px;
+    margin-bottom:25px;
+    background:linear-gradient(135deg,#00f5ff,#6f00ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:float 4s ease-in-out infinite;
+}
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-6px)}
+}
+section p{
+    font-size:17px;
+    line-height:1.9;
+    opacity:.88;
+    transition:.4s;
+}
+section p:hover{transform:translateX(6px)}
+
+/* ===== REVEAL ===== */
+.reveal{
+    opacity:0;
+    transform:translateY(80px) scale(.95);
+    transition:1.2s cubic-bezier(.2,.8,.2,1);
+}
+.reveal.active{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+/* ===== CARDS ===== */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+.card{
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+    transition:.5s;
+}
+.card:hover{
+    box-shadow:0 45px 120px rgba(0,245,255,.25);
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    opacity:.6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== MOTIVATION BOX ===== */
+.motivation-box{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    width:300px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+    z-index:999;
+    animation:boxFloat 5s ease-in-out infinite;
+}
+
+@keyframes boxFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+.motivation-text{
+    font-size:15px;
+    line-height:1.7;
+    opacity:.9;
+    transition:.5s;
+}
+
+.motivation-btn{
+    margin-top:15px;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:30px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#00f5ff,#6f00ff);
+    color:#000;
+    transition:.3s;
+}
+
+.motivation-btn:hover{
+    transform:scale(1.05);
+}
+
+/* Entrance animation */
+.motivation-hide{
+    opacity:0;
+    transform:translateY(40px);
+}
+.motivation-show{
+    opacity:1;
+    transform:translateY(0);
+    transition:.8s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.motivation-box{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    width:280px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+    z-index:999;
+}
+.motivation-text{
+    font-size:15px;
+    line-height:1.7;
+}
+.motivation-btn{
+    margin-top:15px;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:30px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#00f5ff,#6f00ff);
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <h2>الدخول مش للجميع</h2>
+    <p>في مساحات خاصة… علشان تتحافظ</p>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">دخول</button>
+    <div id="error">الباسورد غلط 👀</div>
+  </div>
+</div>
+
+<!-- SITE -->
+<div id="site">
+
+<section class="hero reveal">
+<h1>منى <span>| Personal Space</span></h1>
+<p>
+مش مجرد اسم… دي رحلة.  
+<br><br>
+في أيام الدنيا بتضغط،  
+وفي أيام بنضحك غصب عننا 😅  
+بس الحقيقة واحدة:  
+<strong>اللي عنده حلم، عنده سبب يكمل.</strong>
+</p>
+<a class="btn" href="https://wa.me/201021669012" target="_blank">💬 واتساب مباشر</a>
+</section>
+
+<section class="reveal">
+<h2>رحلة مش سهلة</h2>
+<p>
+مفيش طريق مستقيم دايمًا،  
+وفي أيام بتحس إنك محتاج إجازة من نفسك 🤦‍♀️  
+بس طول ما لسه فيك نفس  
+يبقى لسه فيك حيل.
+</p>
+</section>
+
+<section class="reveal">
+<h2>مش دايمًا تمام… وده تمام</h2>
+<p>
+مش كل قرار عبقري  
+ولا كل خطوة محسوبة  
+بس الغلط مش نهاية  
+ده درس جاي من غير كتاب.
+</p>
+</section>
+
+<section class="reveal">
+<div class="cards">
+<div class="card">
+<h3>القوة الحقيقية</h3>
+<p>القوة مش في السرعة… القوة في الاستمرار.</p>
+</div>
+<div class="card">
+<h3>التقدم البطيء</h3>
+<p>حتى لو خطوة صغيرة… لسه خطوة.</p>
+</div>
+<div class="card">
+<h3>خلاصة</h3>
+<p>بتغلط، بتضحك، بتتعب، وبترجع تكمّل… وده كفاية قوي 👌</p>
+</div>
+</div>
+</section>
+
+<section class="reveal">
+<h2>اضغطي هنا لو اليوم تقيل</h2>
+<button class="btn" onclick="smile()">😄 جرعة خفّة دم</button>
+</section>
+
+<footer>
+Made with respect & real feelings
+</footer>
+
+</div>
+
+<script>
+function login(){
+    const pass=document.getElementById("password").value;
+    if(pass==="mony2026"){
+        loginBox=document.getElementById("login");
+        site=document.getElementById("site");
+        loginBox.style.display="none";
+        site.style.display="block";
+    }else{
+        document.getElementById("error").style.display="block";
+    }
+}
+
+/* Reveal */
+const reveals=document.querySelectorAll(".reveal");
+function revealOnScroll(){
+    reveals.forEach(sec=>{
+        const top=sec.getBoundingClientRect().top;
+        if(top<window.innerHeight-120){
+            sec.classList.add("active");
+        }
+    });
+}
+window.addEventListener("scroll",revealOnScroll);
+revealOnScroll();
+
+/* 3D cards */
+document.addEventListener("mousemove",e=>{
+    const x=(window.innerWidth/2-e.clientX)/70;
+    const y=(window.innerHeight/2-e.clientY)/70;
+    document.querySelectorAll(".card").forEach(card=>{
+        card.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+});
+
+/* Fun */
+function smile(){
+    const msgs=[
+        "خدي نفس… الدنيا لسه شغالة 😌",
+        "كوباية شاي ممكن تحل كتير ☕",
+        "مش مطلوب تبقي بطلة كل يوم 😉",
+        "لسه بدري على الاستسلام 💪"
+    ];
+    alert(msgs[Math.floor(Math.random()*msgs.length)]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function login(){
+    const pass = document.getElementById("password").value;
+
+    if(pass === "mony2026"){
+        document.getElementById("login").style.display = "none";
+        document.getElementById("site").style.display = "block";
+
+        // شغّل صندوق التحفيز بعد الدخول
+        startMotivation();
+    }else{
+        document.getElementById("error").style.display = "block";
+    }
+}
+
+/* ===== MOTIVATION INSIDE LOCK ===== */
+function startMotivation(){
+
+    // منع التكرار
+    if(document.querySelector(".motivation-box")) return;
+
+    const box = document.createElement("div");
+    box.className = "motivation-box motivation-hide";
+
+    const text = document.createElement("div");
+    text.className = "motivation-text";
+
+    const btn = document.createElement("button");
+    btn.className = "motivation-btn";
+    btn.innerText = "جرعة طاقة 😄";
+
+    box.appendChild(text);
+    box.appendChild(btn);
+
+    // ضيفه جوه الموقع المقفول
+    document.getElementById("site").appendChild(box);
+
+    const messages = [
+        "دلوقتي دخلنا… نكمل بهدوء 😌",
+        "مش كل يوم سهل، بس إنتي هنا 👌",
+        "الغلط جوّه هنا آمن 😉",
+        "حتى التعب ليه مساحة هنا",
+        "لسه بنحاول؟ يبقى إحنا تمام 💪",
+        "ضحكة صغيرة ممكن تفرق 😄"
+    ];
+
+    function changeMessage(){
+        const random = Math.floor(Math.random() * messages.length);
+        text.style.opacity = 0;
+        setTimeout(()=>{
+            text.innerText = messages[random];
+            text.style.opacity = 1;
+        },400);
+    }
+
+    btn.addEventListener("click", changeMessage);
+
+    setTimeout(()=>{
+        box.classList.remove("motivation-hide");
+        box.classList.add("motivation-show");
+        changeMessage();
+    },1000);
+
+    setInterval(changeMessage, 12000);
+}
+</script>
+
+</body>
+</html>
